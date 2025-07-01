@@ -6,9 +6,13 @@ import GoodbyeMessage from "./components/GoodbyeMessage";
 import ThemeToggle from "./components/ThemeToggle";
 
 function App() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+  const stored = localStorage.getItem("prefers-dark");
+  return stored === "true"; // Si no hay nada, será false por defecto
+  });
   useEffect(() => {
   document.body.classList.toggle("dark-mode", isDarkMode);
+  localStorage.setItem("prefers-dark", isDarkMode);
 }, [isDarkMode]);
 
   const [step, setStep] = useState("select");
@@ -17,6 +21,7 @@ function App() {
   const handleCurrencySelection = (currency) => {
     setSelectedCurrency(currency);
     setStep("result");
+    setLastUpdated(getLastUpdated());
   };
 
   const handleNewQuery = () => {
@@ -27,6 +32,19 @@ function App() {
   const handleExit = () => {
     setStep("goodbye");
   };
+
+  const getLastUpdated = () => {
+  return new Date().toLocaleString("es-AR", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+};
+
+const [lastUpdated, setLastUpdated] = useState(getLastUpdated());
+
 
   return (
   <main>
@@ -44,7 +62,9 @@ function App() {
                 <h1 className="app-title">Cotizador de Monedas</h1>
               </div>
               <div className="theme-toggle-wrapper">
-                <ThemeToggle />
+                <ThemeToggle
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}/>
               </div>
             </header>
 
@@ -58,6 +78,7 @@ function App() {
           <>
             <section className="section fade-in">
               <ExchangeRateDisplay currency={selectedCurrency} />
+              <p className="timestamp">Última actualización: {lastUpdated}</p>
             </section>
             <section className="section buttons fade-in">
               <ActionButtons
@@ -85,6 +106,8 @@ function App() {
           >
             ExchangeRate-API
           </a>
+          .<br />
+            © 2025 AnaSposito
         </small>
       </footer>
     </div>

@@ -292,3 +292,10 @@ body.dark-mode {
   right: 1rem;
   z-index: 10;
 }
+.timestamp {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
