@@ -1,10 +1,10 @@
 # Cotizador de Monedas
 
-Aplicación web para consultar el tipo de cambio actualizado de distintas divisas, con un diseño accesible, responsivo y compatibilidad con modo claro/oscuro.
+Aplicación web para consultar el tipo de cambio actualizado en tiempo real de distintas divisas, con un diseño accesible, responsivo y compatibilidad con modo claro/oscuro.
 
 ---
 
-## 🌐 Demo en vivo
+##  Demo en vivo
 
 [ Ver la app publicada](https://cotizador-ana.netlify.app/)
 
@@ -52,7 +52,7 @@ Aplicación web para consultar el tipo de cambio actualizado de distintas divisa
 ##  Instalación local
 
 ```bash
-git clone https://github.com/tunombre/cotizador-moneda.git
+git clone https://github.com/e-legal032/cotizador-moneda.git
 cd cotizador-moneda
 npm install
 npm run dev
